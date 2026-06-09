@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'screens/home_screen.dart';
 import 'screens/explore_screen.dart';
 import 'screens/create_post_screen.dart';
-import 'screens/messages_screen.dart';
+import 'screens/onboarding_screen.dart';
+import 'screens/event_details_screen.dart';
+import 'screens/communities_screen.dart';
+import 'screens/chats_screen.dart';
 import 'screens/profile_screen.dart';
 
 void main() {
@@ -40,6 +43,11 @@ class ALUConnectApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => const MainShell(),
+        '/onboarding': (context) => const OnboardingScreen(),
+        '/event-details': (context) => const EventDetailsScreen(),
+        '/communities': (context) => const CommunitiesScreen(),
+        '/chats': (context) => const ChatsScreen(),
+        '/profile': (context) => const ProfileScreen(),
         '/create': (context) => const CreatePostScreen(),
       },
     );
@@ -59,13 +67,9 @@ class _MainShellState extends State<MainShell> {
   final List<Widget> _pages = const [
     HomeScreen(),
     ExploreScreen(),
-    SizedBox(),
-    MessagesScreen(),
-    ProfileScreen(),
   ];
 
   void _onTabTapped(int index) {
-    if (index == 2) return;
     setState(() => _currentIndex = index);
   }
 
@@ -118,8 +122,6 @@ class _BottomNav extends StatelessWidget {
           _NavItem(icon: Icons.home_rounded, label: 'Home', index: 0, current: currentIndex, onTap: onTap, gold: gold, inactive: inactive),
           _NavItem(icon: Icons.explore_rounded, label: 'Explore', index: 1, current: currentIndex, onTap: onTap, gold: gold, inactive: inactive),
           const SizedBox(width: 56),
-          _NavItem(icon: Icons.chat_bubble_rounded, label: 'Chat', index: 3, current: currentIndex, onTap: onTap, gold: gold, inactive: inactive),
-          _NavItem(icon: Icons.person_rounded, label: 'Profile', index: 4, current: currentIndex, onTap: onTap, gold: gold, inactive: inactive),
         ],
       ),
     );
