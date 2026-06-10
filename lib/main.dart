@@ -122,6 +122,8 @@ class _BottomNav extends StatelessWidget {
           _NavItem(icon: Icons.home_rounded, label: 'Home', index: 0, current: currentIndex, onTap: onTap, gold: gold, inactive: inactive),
           _NavItem(icon: Icons.explore_rounded, label: 'Explore', index: 1, current: currentIndex, onTap: onTap, gold: gold, inactive: inactive),
           const SizedBox(width: 56),
+          _NavItem(icon: Icons.group_rounded, label: 'Community', index: 2, current: currentIndex, onTap: onTap, gold: gold, inactive: inactive),
+          _NavItem(icon: Icons.person_rounded, label: 'Profile', index: 3, current: currentIndex, onTap: onTap, gold: gold, inactive: inactive),
         ],
       ),
     );
