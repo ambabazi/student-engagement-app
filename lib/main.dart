@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'screens/home_screen.dart';
+// import 'screens/home_screen.dart';
 import 'screens/explore_screen.dart';
 import 'screens/create_post_screen.dart';
 import 'screens/onboarding_screen.dart';
@@ -40,7 +40,7 @@ class ALUConnectApp extends StatelessWidget {
           hintStyle: TextStyle(color: Colors.white.withOpacity(0.3)),
         ),
       ),
-      initialRoute: '/',
+      initialRoute: '/chats',
       routes: {
         '/': (context) => const MainShell(),
         '/onboarding': (context) => const OnboardingScreen(),
@@ -65,9 +65,9 @@ class _MainShellState extends State<MainShell> {
   int _currentIndex = 0;
 
   final List<Widget> _pages = const [
-    HomeScreen(),
+    ChatsScreen(),
     ExploreScreen(),
-    CommunitiesScreen(),  
+    CommunitiesScreen(),
     ProfileScreen(),
   ];
 
