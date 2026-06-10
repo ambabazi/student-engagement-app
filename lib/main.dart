@@ -67,6 +67,8 @@ class _MainShellState extends State<MainShell> {
   final List<Widget> _pages = const [
     HomeScreen(),
     ExploreScreen(),
+    CommunitiesScreen(),  
+    ProfileScreen(),
   ];
 
   void _onTabTapped(int index) {
@@ -77,7 +79,7 @@ class _MainShellState extends State<MainShell> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: IndexedStack(
-        index: _currentIndex == 2 ? 0 : _currentIndex,
+        index: _currentIndex,
         children: _pages,
       ),
       floatingActionButton: SizedBox(
