@@ -27,9 +27,7 @@ class ALUConnectApp extends StatelessWidget {
           surface: Color(0xFF161B22),
         ),
         fontFamily: 'SF Pro Display',
-        textTheme: const TextTheme(
-          bodyMedium: TextStyle(color: Colors.white),
-        ),
+        textTheme: const TextTheme(bodyMedium: TextStyle(color: Colors.white)),
         inputDecorationTheme: InputDecorationTheme(
           filled: true,
           fillColor: const Color(0xFF1C2333),
@@ -37,13 +35,13 @@ class ALUConnectApp extends StatelessWidget {
             borderRadius: BorderRadius.circular(12),
             borderSide: BorderSide.none,
           ),
-          hintStyle: TextStyle(color: Colors.white.withOpacity(0.3)),
+          hintStyle: TextStyle(color: Colors.white.withValues(alpha: 0.3)),
         ),
       ),
-      initialRoute: '/',
+      initialRoute: '/onboarding',
       routes: {
-        '/': (context) => const MainShell(),
         '/onboarding': (context) => const OnboardingScreen(),
+        '/': (context) => const MainShell(),
         '/event-details': (context) => const EventDetailsScreen(),
         '/communities': (context) => const CommunitiesScreen(),
         '/chats': (context) => const ChatsScreen(),
@@ -67,7 +65,7 @@ class _MainShellState extends State<MainShell> {
   final List<Widget> _pages = const [
     HomeScreen(),
     ExploreScreen(),
-    CommunitiesScreen(),  
+    CommunitiesScreen(),
     ProfileScreen(),
   ];
 
@@ -78,10 +76,7 @@ class _MainShellState extends State<MainShell> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: IndexedStack(
-        index: _currentIndex,
-        children: _pages,
-      ),
+      body: IndexedStack(index: _currentIndex, children: _pages),
       floatingActionButton: SizedBox(
         width: 56,
         height: 56,
@@ -121,11 +116,43 @@ class _BottomNav extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          _NavItem(icon: Icons.home_rounded, label: 'Home', index: 0, current: currentIndex, onTap: onTap, gold: gold, inactive: inactive),
-          _NavItem(icon: Icons.explore_rounded, label: 'Explore', index: 1, current: currentIndex, onTap: onTap, gold: gold, inactive: inactive),
+          _NavItem(
+            icon: Icons.home_rounded,
+            label: 'Home',
+            index: 0,
+            current: currentIndex,
+            onTap: onTap,
+            gold: gold,
+            inactive: inactive,
+          ),
+          _NavItem(
+            icon: Icons.explore_rounded,
+            label: 'Explore',
+            index: 1,
+            current: currentIndex,
+            onTap: onTap,
+            gold: gold,
+            inactive: inactive,
+          ),
           const SizedBox(width: 56),
-          _NavItem(icon: Icons.group_rounded, label: 'Community', index: 2, current: currentIndex, onTap: onTap, gold: gold, inactive: inactive),
-          _NavItem(icon: Icons.person_rounded, label: 'Profile', index: 3, current: currentIndex, onTap: onTap, gold: gold, inactive: inactive),
+          _NavItem(
+            icon: Icons.group_rounded,
+            label: 'Community',
+            index: 2,
+            current: currentIndex,
+            onTap: onTap,
+            gold: gold,
+            inactive: inactive,
+          ),
+          _NavItem(
+            icon: Icons.person_rounded,
+            label: 'Profile',
+            index: 3,
+            current: currentIndex,
+            onTap: onTap,
+            gold: gold,
+            inactive: inactive,
+          ),
         ],
       ),
     );
@@ -142,8 +169,13 @@ class _NavItem extends StatelessWidget {
   final Color inactive;
 
   const _NavItem({
-    required this.icon, required this.label, required this.index,
-    required this.current, required this.onTap, required this.gold, required this.inactive,
+    required this.icon,
+    required this.label,
+    required this.index,
+    required this.current,
+    required this.onTap,
+    required this.gold,
+    required this.inactive,
   });
 
   @override
@@ -159,7 +191,10 @@ class _NavItem extends StatelessWidget {
           children: [
             Icon(icon, color: isActive ? gold : inactive, size: 22),
             const SizedBox(height: 4),
-            Text(label, style: TextStyle(color: isActive ? gold : inactive, fontSize: 10)),
+            Text(
+              label,
+              style: TextStyle(color: isActive ? gold : inactive, fontSize: 10),
+            ),
           ],
         ),
       ),
