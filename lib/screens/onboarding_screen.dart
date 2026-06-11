@@ -4,6 +4,7 @@ class OnboardingScreen extends StatelessWidget {
   const OnboardingScreen({super.key});
 
   static const _border = Color(0xFF21262D);
+  static const _allowedDomain = '@alustudent.com';
 
   void _goHome(BuildContext context) {
     Navigator.of(context).pushNamedAndRemoveUntil('/', (route) => false);
@@ -11,6 +12,10 @@ class OnboardingScreen extends StatelessWidget {
 
   void _sheet(BuildContext context, String title, {bool signup = false}) {
     final gold = Theme.of(context).colorScheme.primary;
+    final formKey = GlobalKey<FormState>();
+    final fullNameController = TextEditingController();
+    final emailController = TextEditingController();
+    final passwordController = TextEditingController();
 
     showModalBottomSheet(
       context: context,
@@ -26,61 +31,86 @@ class OnboardingScreen extends StatelessWidget {
           20,
           20 + MediaQuery.of(sheetContext).viewInsets.bottom,
         ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              title,
-              style: const TextStyle(
-                color: Colors.white,
-                fontSize: 24,
-                fontWeight: FontWeight.w700,
-              ),
-            ),
-            const SizedBox(height: 16),
-            if (signup) ...[
-              const TextField(
-                decoration: InputDecoration(
-                  hintText: 'Full name',
-                  prefixIcon: Icon(Icons.person_outline),
+        child: Form(
+          key: formKey,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                title,
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 24,
+                  fontWeight: FontWeight.w700,
                 ),
+              ),
+              const SizedBox(height: 16),
+              if (signup) ...[
+                TextFormField(
+                  controller: fullNameController,
+                  decoration: const InputDecoration(
+                    hintText: 'Full name',
+                    prefixIcon: Icon(Icons.person_outline),
+                  ),
+                  validator: (value) => value == null || value.trim().isEmpty
+                      ? 'Enter your full name'
+                      : null,
+                ),
+                const SizedBox(height: 12),
+              ],
+              TextFormField(
+                controller: emailController,
+                keyboardType: TextInputType.emailAddress,
+                decoration: const InputDecoration(
+                  hintText: 'Email',
+                  prefixIcon: Icon(Icons.email_outlined),
+                ),
+                validator: (value) {
+                  final email = value?.trim().toLowerCase() ?? '';
+                  if (email.isEmpty) {
+                    return 'Enter your ALU email';
+                  }
+                  if (!email.endsWith(_allowedDomain)) {
+                    return 'Use an @alustudent.com email';
+                  }
+                  return null;
+                },
               ),
               const SizedBox(height: 12),
+              TextFormField(
+                controller: passwordController,
+                obscureText: true,
+                decoration: const InputDecoration(
+                  hintText: 'Password',
+                  prefixIcon: Icon(Icons.lock_outline),
+                ),
+                validator: (value) =>
+                    value == null || value.isEmpty ? 'Enter your password' : null,
+              ),
+              const SizedBox(height: 16),
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: () {
+                    if (!(formKey.currentState?.validate() ?? false)) {
+                      return;
+                    }
+                    Navigator.pop(sheetContext);
+                    _goHome(context);
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: gold,
+                    foregroundColor: Colors.black,
+                    padding: const EdgeInsets.symmetric(vertical: 14),
+                  ),
+                  child: Text(
+                    signup ? 'Create account' : 'Sign in',
+                    style: const TextStyle(fontWeight: FontWeight.w700),
+                  ),
+                ),
+              ),
             ],
-            const TextField(
-              decoration: InputDecoration(
-                hintText: 'Email',
-                prefixIcon: Icon(Icons.email_outlined),
-              ),
-            ),
-            const SizedBox(height: 12),
-            const TextField(
-              obscureText: true,
-              decoration: InputDecoration(
-                hintText: 'Password',
-                prefixIcon: Icon(Icons.lock_outline),
-              ),
-            ),
-            const SizedBox(height: 16),
-            SizedBox(
-              width: double.infinity,
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.pop(sheetContext);
-                  _goHome(context);
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: gold,
-                  foregroundColor: Colors.black,
-                  padding: const EdgeInsets.symmetric(vertical: 14),
-                ),
-                child: Text(
-                  signup ? 'Create account' : 'Sign in',
-                  style: const TextStyle(fontWeight: FontWeight.w700),
-                ),
-              ),
-            ),
-          ],
+          ),
         ),
       ),
     );
@@ -174,33 +204,17 @@ class OnboardingScreen extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(height: 20),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: OutlinedButton(
-                          onPressed: () => _sheet(context, 'Sign in'),
-                          style: OutlinedButton.styleFrom(
-                            foregroundColor: Colors.white,
-                            side: const BorderSide(color: _border),
-                            padding: const EdgeInsets.symmetric(vertical: 12),
-                          ),
-                          child: const Text('Google'),
-                        ),
+                  SizedBox(
+                    width: double.infinity,
+                    child: OutlinedButton(
+                      onPressed: () => _sheet(context, 'Sign in'),
+                      style: OutlinedButton.styleFrom(
+                        foregroundColor: Colors.white,
+                        side: const BorderSide(color: _border),
+                        padding: const EdgeInsets.symmetric(vertical: 12),
                       ),
-                      const SizedBox(width: 12),
-                      Expanded(
-                        child: OutlinedButton(
-                          onPressed: () =>
-                              _sheet(context, 'Sign up', signup: true),
-                          style: OutlinedButton.styleFrom(
-                            foregroundColor: Colors.white,
-                            side: const BorderSide(color: _border),
-                            padding: const EdgeInsets.symmetric(vertical: 12),
-                          ),
-                          child: const Text('Apple'),
-                        ),
-                      ),
-                    ],
+                      child: const Text('Google'),
+                    ),
                   ),
                   const SizedBox(height: 20),
                   TextButton(
