@@ -8,62 +8,6 @@ class ChatsScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color(0xFF06162D),
 
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: const Color(0xFFF5C26B),
-        onPressed: () {},
-        shape: const CircleBorder(),
-        child: const Icon(
-          Icons.add,
-          color: Colors.black,
-          size: 30,
-        ),
-      ),
-
-      floatingActionButtonLocation:
-          FloatingActionButtonLocation.centerDocked,
-
-      bottomNavigationBar: BottomAppBar(
-        color: const Color(0xFF08192F),
-        shape: const CircularNotchedRectangle(),
-
-        child: SizedBox(
-          height: 70,
-
-          child: Row(
-            mainAxisAlignment:
-                MainAxisAlignment.spaceAround,
-
-            children: [
-              navItem(
-                Icons.home_outlined,
-                "Home",
-                Colors.grey,
-              ),
-
-              navItem(
-                Icons.explore_outlined,
-                "Explore",
-                Colors.grey,
-              ),
-
-              const SizedBox(width: 40),
-
-              navItem(
-                Icons.chat_bubble_outline,
-                "Chat",
-                const Color(0xFFF5C26B),
-              ),
-
-              navItem(
-                Icons.person_outline,
-                "Profile",
-                Colors.grey,
-              ),
-            ],
-          ),
-        ),
-      ),
-
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(20),
@@ -216,32 +160,6 @@ class ChatsScreen extends StatelessWidget {
           ),
         ),
       ),
-    );
-  }
-
-  static Widget navItem(
-    IconData icon,
-    String label,
-    Color color,
-  ) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Icon(
-          icon,
-          color: color,
-        ),
-
-        const SizedBox(height: 4),
-
-        Text(
-          label,
-          style: TextStyle(
-            color: color,
-            fontSize: 12,
-          ),
-        ),
-      ],
     );
   }
 }
