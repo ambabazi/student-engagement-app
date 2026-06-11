@@ -190,8 +190,6 @@ class _CommunitiesScreenState extends State<CommunitiesScreen>
           ),
         ],
       ),
-      floatingActionButton: _buildFAB(),
-      bottomNavigationBar: _buildBottomNav(),
     );
   }
 
@@ -310,82 +308,8 @@ class _CommunitiesScreenState extends State<CommunitiesScreen>
     );
   }
 
-  Widget _buildFAB() {
-    return FloatingActionButton(
-      onPressed: () => _showCreateCommunitySheet(),
-      backgroundColor: const Color(0xFFF5A623),
-      child: const Icon(Icons.add, color: Colors.black),
-    );
-  }
-
-  void _showCreateCommunitySheet() {
-    showModalBottomSheet(
-      context: context,
-      backgroundColor: const Color(0xFF1A1A2E),
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-      ),
-      builder: (_) => Padding(
-        padding: const EdgeInsets.all(24),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text(
-              'Start a Community',
-              style: TextStyle(
-                  color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 8),
-            Text(
-              'Create a space for students with shared interests.',
-              style: TextStyle(color: Colors.white.withOpacity(0.5), fontSize: 13),
-            ),
-            const SizedBox(height: 20),
-            SizedBox(
-              width: double.infinity,
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFFF5A623),
-                  foregroundColor: Colors.black,
-                  padding: const EdgeInsets.symmetric(vertical: 14),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10)),
-                ),
-                onPressed: () => Navigator.pop(context),
-                child: const Text('Get Started',
-                    style: TextStyle(fontWeight: FontWeight.bold)),
-              ),
-            ),
-            const SizedBox(height: 12),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildBottomNav() {
-    return BottomNavigationBar(
-      backgroundColor: const Color(0xFF0D0D1A),
-      selectedItemColor: const Color(0xFFF5A623),
-      unselectedItemColor: Colors.white.withOpacity(0.4),
-      showSelectedLabels: true,
-      showUnselectedLabels: true,
-      type: BottomNavigationBarType.fixed,
-      currentIndex: 2,
-      selectedFontSize: 10,
-      unselectedFontSize: 10,
-      items: const [
-        BottomNavigationBarItem(icon: Icon(Icons.home_outlined), label: 'Home'),
-        BottomNavigationBarItem(icon: Icon(Icons.explore_outlined), label: 'Explore'),
-        BottomNavigationBarItem(icon: Icon(Icons.group_outlined), label: 'Communities'),
-        BottomNavigationBarItem(icon: Icon(Icons.chat_bubble_outline), label: 'Chat'),
-        BottomNavigationBarItem(icon: Icon(Icons.person_outline), label: 'Profile'),
-      ],
-      onTap: (_) {}, // navigation handled by main.dart router
-    );
-  }
 }
+
 
 // ─── Community List ───────────────────────────────────────────────────────────
 

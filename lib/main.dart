@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-// import 'screens/home_screen.dart';
+import 'screens/home_screen.dart';
 import 'screens/explore_screen.dart';
 import 'screens/create_post_screen.dart';
 import 'screens/onboarding_screen.dart';
@@ -63,9 +63,10 @@ class _MainShellState extends State<MainShell> {
   int _currentIndex = 0;
 
   final List<Widget> _pages = const [
-    ChatsScreen(),
+    HomeScreen(),
     ExploreScreen(),
     CommunitiesScreen(),
+    ChatsScreen(),
     ProfileScreen(),
   ];
 
@@ -145,9 +146,18 @@ class _BottomNav extends StatelessWidget {
             inactive: inactive,
           ),
           _NavItem(
+            icon: Icons.chat_bubble_rounded,
+            label: 'Chat',
+            index: 3,
+            current: currentIndex,
+            onTap: onTap,
+            gold: gold,
+            inactive: inactive,
+          ),
+          _NavItem(
             icon: Icons.person_rounded,
             label: 'Profile',
-            index: 3,
+            index: 4,
             current: currentIndex,
             onTap: onTap,
             gold: gold,
