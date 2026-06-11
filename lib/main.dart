@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'screens/home_screen.dart';
+// import 'screens/home_screen.dart';
 import 'screens/explore_screen.dart';
 import 'screens/create_post_screen.dart';
 import 'screens/onboarding_screen.dart';
@@ -63,7 +63,7 @@ class _MainShellState extends State<MainShell> {
   int _currentIndex = 0;
 
   final List<Widget> _pages = const [
-    HomeScreen(),
+    ChatsScreen(),
     ExploreScreen(),
     CommunitiesScreen(),
     ProfileScreen(),
